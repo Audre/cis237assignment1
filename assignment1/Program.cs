@@ -10,6 +10,31 @@ namespace assignment1
     {
         static void Main(string[] args)
         {
+            UserInterface ui = new UserInterface();
+
+            int choice = ui.GetUserInput();
+
+            while (choice != 2)
+            {
+                switch (choice)
+                {
+                    case 1:
+                        {
+                            CSVProcessor file = new CSVProcessor();
+                            file.OpenFile();
+                            file.ToWineItem();
+                            Console.WriteLine("File successfully loaded.");
+                            break;
+                        }
+                    case 2:
+                        {
+
+                        }
+                }
+            }
+
+
+
         }
     }
 }
