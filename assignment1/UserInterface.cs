@@ -8,6 +8,7 @@ namespace assignment1
 {
     class UserInterface
     {
+        // prints menu to display user choices, then gets user input for the choice
         public int GetUserInput()
         {
             this.PrintMenu();
@@ -25,11 +26,7 @@ namespace assignment1
             return Int32.Parse(input);
         }
 
-        public void PrintAllOutput(string allOutput)
-        {
-            Console.WriteLine(allOutput);
-        }
-
+        // prints menu 
         public void PrintMenu()
         {
             Console.WriteLine("What would you like to do?");

@@ -9,36 +9,51 @@ namespace assignment1
 {
     class CSVProcessor
     {
-        StreamReader inputFile;
-        String readLine = String.Empty;
-
-        public void OpenFile()
+        // opens file at path passed in, processes file, then closes file when done. 
+        public bool ImportCSV(string pathToCSVFile, WineItemCollections wineItemCollection)
         {
-            inputFile = File.OpenText(@"../../../datafiles\WineList.csv");
-        }
+            StreamReader streamReader = null;
 
-        public void ReadFile()
-        {
-
-            readLine = inputFile.ReadLine();
-        }
-
-        public void ToWineItem()
-        {
-            String[] fileArray = new String[3];
-            while (!inputFile.EndOfStream)
+            try
             {
-                this.ReadFile();
-                fileArray = readLine.Split(',');
+                string line;
 
-                WineItem wineItem = new WineItem(fileArray[0], fileArray[1], fileArray[2]);
-                //Console.WriteLine(wineItem.ToString());
-                WineItemCollections wineItemCollection = new WineItemCollections(wineItem);
-                //Console.WriteLine(wineItemCollection.ToString());
+                streamReader = new StreamReader(pathToCSVFile);
+                 
+
+                while ((line = streamReader.ReadLine()) != null)
+                {
+                    ProcessLine(line, wineItemCollection);
+                }
+
+                return true;
             }
-            
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                Console.WriteLine(ex.StackTrace);
+                return false;
+            }
+
+            finally
+            {
+                if (streamReader != null)
+                {
+                    streamReader.Close();
+                }
+            }
+        }
+
+        // processes file - splits line at commas into 3-element array, each element is then
+        // passed to wineItem and then added to wineItemCollection array. 
+        public void ProcessLine(string line, WineItemCollections wineItemCollection)
+        {
+            string[] fileArray = line.Split(',');
+
+            WineItem wineItem = new WineItem(fileArray[0], fileArray[1], fileArray[2]);
+            wineItemCollection.AddWineItem(wineItem);
 
         }
-        
     }
 }

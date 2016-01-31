@@ -16,7 +16,7 @@ namespace assignment1
         // default constructor
         public WineItem()
         {
-
+            // This is left blank.
         }
 
         // 3-parameter constructor
@@ -51,5 +51,7 @@ namespace assignment1
             get { return pack; }
             set { pack = value; }
         }
+
+        
     }
 }
