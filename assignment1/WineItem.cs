@@ -19,6 +19,15 @@ namespace assignment1
             // This is left blank.
         }
 
+        // 1-parameter constructor
+        public WineItem(string recordFromCSV)
+        {
+            string[] fileArray = recordFromCSV.Split(' ');
+            this.id = fileArray[0];
+            this.description = fileArray[1];
+            this.pack = fileArray[2];
+        }
+
         // 3-parameter constructor
         public WineItem(string id, string description, string pack)
         {

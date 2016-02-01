@@ -39,7 +39,7 @@ namespace assignment1
                             }
                             break;
                         }
-                    case 2: 
+                    case 2:
                         {
                             // displays all wine items
                             Console.WriteLine(wineItemCollection.ToString());
@@ -51,41 +51,62 @@ namespace assignment1
                         {
                             // allows user to search for wine by ID and displays wine info or that wine does not exist
                             Console.WriteLine("Enter the ID you wish to search for: ");
-                            string userSearch = Console.ReadLine();
-                            wineItemCollection.SearchWine(userSearch);
+                            string searchWineItemID = Console.ReadLine();
+                            WineItem wineItemResult = wineItemCollection.SearchWine(searchWineItemID);
+                            if (wineItemResult != null)
+                            {
+                                Console.WriteLine(wineItemResult.ToString());
+                            }
+                            else
+                            {
+                                Console.WriteLine("The ID was not found in the database.");
+                            }
                             Console.WriteLine();
                             break;
                         }
 
                     case 4:
                         {
-                            // allows user to add wine item to array
+                            // allows user to add wine item to array if the ID is not already in the database
 
-                            
+
                             Console.WriteLine("Please enter the wine ID: ");
                             string userID = Console.ReadLine();
+                            WineItem wineItemResult = wineItemCollection.SearchWine(userID);
+                            if (wineItemResult != null) 
+                            {
+                                Console.WriteLine("That ID is already in the database.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please enter the wine description: ");
+                                string userDescription = Console.ReadLine();
 
-                            Console.WriteLine("Please enter the wine description: ");
-                            string userDescription = Console.ReadLine();
+                                Console.WriteLine("Please enter the wine pack: ");
+                                string userPack = Console.ReadLine();
 
-                            Console.WriteLine("Please enter the wine pack: ");
-                            string userPack = Console.ReadLine();
+                                WineItem userWineItem = new WineItem(userID, userDescription, userPack);
+                                wineItemCollection.AddWineItem(userWineItem);
 
-                            WineItem userWineItem = new WineItem(userID, userDescription, userPack);
-                            wineItemCollection.AddWineItem(userWineItem);
+                                Console.WriteLine();
+                                Console.WriteLine(userWineItem.ToString() + " successfully added.");
+                                Console.WriteLine();
+                            }
 
-                            Console.WriteLine();
-                            Console.WriteLine(userWineItem.ToString() + " successfully added.");
-                            Console.WriteLine();
-                            break;
+                            
                         }
+
+                        break;
                 }
 
                 choice = ui.GetUserInput();
             }
 
-
-
+            
         }
+
+
+
     }
+
 }

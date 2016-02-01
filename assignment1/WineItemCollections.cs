@@ -15,9 +15,9 @@ namespace assignment1
         // default constructor
         public WineItemCollections()
         {
-           wineItems = new WineItem[4000];
+            wineItems = new WineItem[4000];
         }
-        
+
         // property 
         public int Index
         {
@@ -41,36 +41,27 @@ namespace assignment1
         // searches array for user-input ID and prints out wine information if found
         // loops through array and converts each element into string, splits at spaces, 
         // then gets the ID (first entry) and compares that to what the user entered.
-        // if found, displays wine info, otherwise displays wine is not found. 
-        public void SearchWine(string wineToFind)
+        // returns the wineItem if found in the array, otherwise returns null.
+        public WineItem SearchWine(string wineIDToFind)
         {
             string tempString = string.Empty;
             string[] tempArray;
-            bool isWineFound = false;
 
-            for (int counter = 0; counter < index; counter ++)
+            for (int counter = 0; counter < index; counter++)
             {
 
                 tempString = wineItems[counter].ToString();
                 tempArray = tempString.Split(' ');
                 tempString = tempArray[0];
-                if (tempString.Equals(wineToFind))
+                if (tempString.Equals(wineIDToFind))
                 {
                     tempString = wineItems[counter].ToString();
-                    isWineFound = true;
-                    break;
+                    WineItem wineItemResult = new WineItem(tempString);
+                    return wineItemResult;
                 }
             }
 
-            if (isWineFound)
-            {
-                    Console.WriteLine(tempString);
-            }
-            else
-            {
-                    Console.WriteLine("That ID is not in the database.");
-            }
-
+            return null;
         }
 
         // overrides ToString() method to display all items in wine array - 
